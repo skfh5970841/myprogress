@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
+import "../storage/storageHelpers.js";
+import { getFromLocalStorageWithRange } from "../storage/storageHelpers.js";
 
 function DayPlan() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -11,6 +13,7 @@ function DayPlan() {
   const [endTime, setEndTime] = useState("10:00");
   const [inputPlan, setInputPlan] = useState("");
   const [planList, setPlanList] = useState([]);
+
   const normalizeTime = (time) => {
     // 시간을 복제하여 원래 시간을 변경하지 않도록 합니다.
     const newTime = new Date(time);
@@ -43,7 +46,6 @@ function DayPlan() {
 
   const addToLocalStorage = (key, value) => {
     const keyVal = getNormalizedKey(key);
-
     localStorage.setItem(keyVal, JSON.stringify(value));
   };
 
@@ -55,7 +57,6 @@ function DayPlan() {
 
   useEffect(() => {
     const storedData = getFromLocalStorage(selectedDate.toString(), []);
-
     setPlanList(storedData);
   }, [selectedDate]);
   const isPlanOverlap = (startTime, endTime, plans) => {

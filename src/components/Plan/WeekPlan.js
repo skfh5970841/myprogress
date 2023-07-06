@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { getFromLocalStorageWithRange } from "../storage/storageHelpers.js";
 
 function WeekPlan() {
   const [date, setDate] = useState(new Date());
@@ -20,7 +21,14 @@ function WeekPlan() {
       date.getMonth(),
       date.getDate() + (6 - date.getDay())
     );
-
+    //
+    console.log(
+      getFromLocalStorageWithRange(
+        start.toLocaleDateString(),
+        end.toLocaleDateString()
+      )
+    );
+    //
     return {
       start: start.toLocaleDateString(),
       end: end.toLocaleDateString(),
@@ -57,39 +65,3 @@ function WeekPlan() {
 }
 
 export default WeekPlan;
-// def get_week_num(date):
-//   """
-//   해당 날짜의 일주일의 시작(같은 주의 일요일)과 일주일의 끝(같은 주의 토요일)을 구하고 그것이 같은 달에서 몇 번째 주인지 세어줍니다.
-
-//   Args:
-//     date: 날짜
-
-//   Returns:
-//     일주일의 시작(같은 주의 일요일)
-//     일주일의 끝(같은 주의 토요일)
-//     해당 달의 몇 번째 주
-//   """
-
-//   # 일요일의 요일을 구합니다.
-//   day_of_week = date.weekday()
-
-//   # 일주일의 시작(같은 주의 일요일)을 구합니다.
-//   start_of_week = date - timedelta(days=day_of_week)
-
-//   # 일주일의 끝(같은 주의 토요일)을 구합니다.
-//   end_of_week = start_of_week + timedelta(days=6)
-
-//   # 해당 달의 몇 번째 주를 구합니다.
-//   week_num = (end_of_week.month - start_of_week.month) // 4 + 1
-
-//   return start_of_week, end_of_week, week_num
-
-// if __name__ == "__main__":
-//   # 날짜를 입력합니다.
-//   date = datetime.date(2023, 6, 14)
-
-//   # 일주일의 시작(같은 주의 일요일)과 일주일의 끝(같은 주의 토요일)을 구합니다.
-//   start_of_week, end_of_week, week_num = get_week_num(date)
-
-//   # 해당 달의 몇 번째 주를 출력합니다.
-//   print(week_num)

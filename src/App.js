@@ -6,7 +6,6 @@ function App() {
   const [isLogin, setisLogin] = useState(false);
   const setLoginval = () => {
     setisLogin(!isLogin);
-    console.log("엥?");
   };
 
   return (
