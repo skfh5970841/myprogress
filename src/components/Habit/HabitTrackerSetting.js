@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const HabitTracker = () => {
+const HabitTrackerSetting = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [startTime, setStartTime] = useState("00:00");
   const [endTime, setEndTime] = useState("23:59");
@@ -279,32 +279,10 @@ const HabitTracker = () => {
               </button>
             </>
           )}
-          {/* <h2>{selectedHabit.title}</h2>
-          <h4>
-            시작 날짜: {new Date(selectedHabit.date).toLocaleDateString()}
-          </h4>
-          <h4>주기: {selectedHabit.days.map((d) => d.day).join(", ")}</h4>
-          <h4>상세 정보: {selectedHabit.description}</h4>
-          <h4>
-            시작 시간: {selectedHabit.startTime} / 종료 시간:{" "}
-            {selectedHabit.endTime}
-          </h4>
-          {!editing ? (
-            <>
-              <button onClick={() => setEditing(true)}>습관 편집</button>
-              <button onClick={() => handleDelete(selectedHabit.id)}>
-                습관 삭제
-              </button>
-            </>
-          ) : (
-            <button onClick={() => handleEdit(selectedHabit.id)}>
-              편집 완료
-            </button>
-          )} */}
         </div>
       )}
     </>
   );
 };
 
-export default HabitTracker;
+export default HabitTrackerSetting;

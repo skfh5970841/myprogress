@@ -6,6 +6,7 @@ import WeekPlan from "./Plan/WeekPlan.js";
 import MonthPlan from "./Plan/MonthPlan.js";
 import YearPlan from "./Plan/YearPlan.js";
 import HabitTrackerSetting from "./Habit/HabitTrackerSetting.js";
+import HabitTracker from "./Habit/HabitTracker.js";
 
 function Main() {
   const [selectedPlanType, setSelectedPlanType] = useState("");
@@ -47,6 +48,12 @@ function Main() {
         >
           Habit Tracker Setting
         </span>
+        <span
+          className="selectorType"
+          onClick={() => handlePlanTypeClick("HabitTracker")}
+        >
+          Habit Tracker
+        </span>
       </div>
       <div className="planTypeContent">
         {selectedPlanType === "Daily" && <DayPlan />}
@@ -54,6 +61,7 @@ function Main() {
         {selectedPlanType === "Montly" && <MonthPlan />}
         {selectedPlanType === "Yearly" && <YearPlan />}
         {selectedPlanType === "HabitTrackerSetting" && <HabitTrackerSetting />}
+        {selectedPlanType === "HabitTracker" && <HabitTracker />}
       </div>
     </>
   );
