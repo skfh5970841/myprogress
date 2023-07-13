@@ -3,11 +3,14 @@ import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// useHabits 커스텀 훅 정의
 const useHabits = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [startTime, setStartTime] = useState("00:00");
   const [endTime, setEndTime] = useState("23:59");
   const [selectedDays, setSelectedDays] = useState([]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [habits, setHabits] = useState([]);
   const [selectedHabit, setSelectedHabit] = useState(null);
   const [editing, setEditing] = useState(false);
@@ -127,20 +130,39 @@ const useHabits = () => {
     setSelectedHabit(null);
   };
 
+  // useHabits 훅에서 반환하는 값
   return {
     selectedDate,
+    setSelectedDate,
     startTime,
+    setStartTime,
     endTime,
+    setEndTime,
     selectedDays,
+    setSelectedDays,
+    title,
+    setTitle,
+    description,
+    setDescription,
     habits,
+    setHabits,
     selectedHabit,
+    setSelectedHabit,
     editing,
+    setEditing,
     showForm,
+    setShowForm,
     editingTitle,
+    setEditingTitle,
     editingPeriod,
+    setEditingPeriod,
     editingDescription,
+    setEditingDescription,
     editingStartTime,
+    setEditingStartTime,
     editingEndTime,
+    setEditingEndTime,
+    days,
     handleClick,
     validateInputs,
     saveHabit,
