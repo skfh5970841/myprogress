@@ -102,6 +102,7 @@ const useHabits = () => {
     } else {
       const habit = habits.find((h) => h.id === habitId);
       setSelectedHabit(habit);
+      //console.log(habit);
     }
   };
 

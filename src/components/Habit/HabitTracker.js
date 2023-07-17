@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useHabits from "./useHabits"; // useHabits 커스텀 훅 가져오기
+import { getTest } from "./getTest";
 
 function HabitTracker() {
   const HabitTrackerSetting = () => {
@@ -42,6 +43,37 @@ function HabitTracker() {
       handleEdit,
       handleDelete,
     } = useHabits(); // useHabits 커스텀 훅 적용
+    const [testData, setTestData] = useState(null);
+    const [checkHabit, setCheckHabit] = useState(false);
+
+    useEffect(() => {
+      async function fetchData() {
+        const test = "testProgress"; // 필요한 test 값을 가져옵니다.
+        const result = await getTest(test);
+        setTestData(result);
+      }
+
+      fetchData();
+    }, []);
+
+    if (!testData) {
+      return <div>Loading...</div>;
+    }
+
+    let today = new Date();
+    let year = today.getFullYear(); // 년도
+    let month = today.getMonth() + 1; // 월
+    let date = today.getDate(); // 날짜
+    let day = today.getDay(); // 요일
+
+    const habitCheckClicked = (event) => {
+      setCheckHabit(event.target.checked);
+      if (event.target.checked === true) {
+        localStorage.setItem(selectedHabit.title, "true");
+      } else {
+        localStorage.setItem(selectedHabit.title, "false");
+      }
+    };
 
     return (
       <>
@@ -59,12 +91,33 @@ function HabitTracker() {
               느낌이다.
             </li>
           </ol>
-          {habits.map((habit) => (
-            <button key={habit.id} onClick={() => handleHabitClick(habit.id)}>
-              {habit.title}
-            </button>
-          ))}
         </p>
+
+        <h2>Today : {year + "/" + month + "/" + date}</h2>
+        <ul>
+          <label>
+            <h3>You did</h3>
+          </label>
+          <li>습관1</li>
+          <li>습관2</li>
+        </ul>
+        <h2>Habit List</h2>
+        {habits.map((habit) => (
+          <button key={habit.id} onClick={() => handleHabitClick(habit.id)}>
+            {habit.title}
+          </button>
+        ))}
+        {selectedHabit != null ? (
+          <>
+            <div>
+              <h3>습관 제목 : {selectedHabit.title}</h3>
+              <input type="checkbox" onChange={habitCheckClicked} />
+            </div>
+          </>
+        ) : (
+          <div>읎어얀</div>
+        )}
+        {JSON.stringify(testData)}
       </>
     );
   };
